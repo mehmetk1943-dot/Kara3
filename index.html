@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kara3 — Content Generator</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">KARA<span>3</span></div>
+      <p class="tagline">Product Content Generator</p>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <!-- Input Panel -->
+    <section class="panel input-panel">
+      <h2 class="panel-title">Product Details</h2>
+
+      <div class="form-group">
+        <label for="productName">Product Name</label>
+        <input type="text" id="productName" placeholder="e.g. Celestial Ring" />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="productType">Product Type</label>
+          <select id="productType">
+            <option value="">Select type…</option>
+            <option>Ring</option>
+            <option>Necklace</option>
+            <option>Bracelet</option>
+            <option>Earrings</option>
+            <option>Pendant</option>
+            <option>Anklet</option>
+            <option>Brooch</option>
+            <option>Cuff</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="material">Material</label>
+          <select id="material">
+            <option value="">Select material…</option>
+            <option>18K Gold</option>
+            <option>14K Gold</option>
+            <option>Rose Gold</option>
+            <option>White Gold</option>
+            <option>Sterling Silver</option>
+            <option>Platinum</option>
+            <option>Gold Vermeil</option>
+            <option>Gold Plated</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="stone">Gemstone / Stone</label>
+          <select id="stone">
+            <option value="">None / No stone</option>
+            <option>Diamond</option>
+            <option>Ruby</option>
+            <option>Sapphire</option>
+            <option>Emerald</option>
+            <option>Pearl</option>
+            <option>Amethyst</option>
+            <option>Opal</option>
+            <option>Turquoise</option>
+            <option>Moonstone</option>
+            <option>Topaz</option>
+            <option>Garnet</option>
+            <option>Cubic Zirconia</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="color">Primary Color</label>
+          <input type="text" id="color" placeholder="e.g. Deep Navy, Champagne" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="targetAudience">Target Audience</label>
+          <select id="targetAudience">
+            <option value="">Select audience…</option>
+            <option>Women 25–35</option>
+            <option>Women 35–50</option>
+            <option>Men 25–40</option>
+            <option>Couples / Gifts</option>
+            <option>Brides / Bridal</option>
+            <option>Luxury Shoppers</option>
+            <option>Minimalists</option>
+            <option>Fashion-forward</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="toneOfVoice">Tone of Voice</label>
+          <select id="toneOfVoice">
+            <option value="">Select tone…</option>
+            <option>Luxurious &amp; Elegant</option>
+            <option>Romantic &amp; Poetic</option>
+            <option>Bold &amp; Confident</option>
+            <option>Minimalist &amp; Clean</option>
+            <option>Playful &amp; Trendy</option>
+            <option>Timeless &amp; Classic</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="generate-btn" id="generateBtn" onclick="generateContent()">
+        <span class="btn-text">Generate Content</span>
+        <span class="btn-loader" id="btnLoader" hidden>Generating…</span>
+      </button>
+
+      <p class="required-note">* All fields improve output quality</p>
+    </section>
+
+    <!-- Output Panel -->
+    <section class="panel output-panel" id="outputPanel" hidden>
+      <div class="output-header">
+        <h2 class="panel-title">Generated Content</h2>
+        <button class="copy-all-btn" onclick="copyAll()">Copy All</button>
+      </div>
+
+      <div class="output-grid">
+        <div class="output-card" data-key="productTitle">
+          <div class="card-header">
+            <span class="card-label">Product Title</span>
+            <button class="copy-btn" onclick="copyCard('productTitle')">Copy</button>
+          </div>
+          <p class="card-content" id="productTitle"></p>
+        </div>
+
+        <div class="output-card" data-key="shortDesc">
+          <div class="card-header">
+            <span class="card-label">Short Description</span>
+            <button class="copy-btn" onclick="copyCard('shortDesc')">Copy</button>
+          </div>
+          <p class="card-content" id="shortDesc"></p>
+        </div>
+
+        <div class="output-card wide" data-key="longDesc">
+          <div class="card-header">
+            <span class="card-label">Long Description</span>
+            <button class="copy-btn" onclick="copyCard('longDesc')">Copy</button>
+          </div>
+          <p class="card-content" id="longDesc"></p>
+        </div>
+
+        <div class="output-card" data-key="instagramCaption">
+          <div class="card-header">
+            <span class="card-label">Instagram Caption</span>
+            <button class="copy-btn" onclick="copyCard('instagramCaption')">Copy</button>
+          </div>
+          <p class="card-content" id="instagramCaption"></p>
+        </div>
+
+        <div class="output-card" data-key="facebookAd">
+          <div class="card-header">
+            <span class="card-label">Facebook Ad Copy</span>
+            <button class="copy-btn" onclick="copyCard('facebookAd')">Copy</button>
+          </div>
+          <p class="card-content" id="facebookAd"></p>
+        </div>
+
+        <div class="output-card" data-key="seoTitle">
+          <div class="card-header">
+            <span class="card-label">SEO Title</span>
+            <button class="copy-btn" onclick="copyCard('seoTitle')">Copy</button>
+          </div>
+          <p class="card-content" id="seoTitle"></p>
+          <span class="char-count" id="seoTitleCount"></span>
+        </div>
+
+        <div class="output-card" data-key="seoMeta">
+          <div class="card-header">
+            <span class="card-label">SEO Meta Description</span>
+            <button class="copy-btn" onclick="copyCard('seoMeta')">Copy</button>
+          </div>
+          <p class="card-content" id="seoMeta"></p>
+          <span class="char-count" id="seoMetaCount"></span>
+        </div>
+      </div>
+
+      <div class="regenerate-row">
+        <button class="regenerate-btn" onclick="generateContent()">Regenerate</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Kara3. All rights reserved.</p>
+  </footer>
+
+  <div class="toast" id="toast">Copied to clipboard!</div>
+
+  <script src="app.js"></script>
+</body>
+</html>
