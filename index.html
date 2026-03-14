@@ -1,202 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kara3 — Content Generator</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Kara3 Commerce Engine — Internal ecommerce marketing tool"/>
+  <title>Kara3 Commerce Engine</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="logo">KARA<span>3</span></div>
-      <p class="tagline">Product Content Generator</p>
+
+<!-- ═══ HEADER ════════════════════════════════════════════════ -->
+<header class="app-header" id="appHeader">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-name">KARA<em>3</em></div>
+      <div class="brand-engine">Commerce Engine</div>
     </div>
-  </header>
-
-  <main class="main-container">
-    <!-- Input Panel -->
-    <section class="panel input-panel">
-      <h2 class="panel-title">Product Details</h2>
-
-      <div class="form-group">
-        <label for="productName">Product Name</label>
-        <input type="text" id="productName" placeholder="e.g. Celestial Ring" />
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="productType">Product Type</label>
-          <select id="productType">
-            <option value="">Select type…</option>
-            <option>Ring</option>
-            <option>Necklace</option>
-            <option>Bracelet</option>
-            <option>Earrings</option>
-            <option>Pendant</option>
-            <option>Anklet</option>
-            <option>Brooch</option>
-            <option>Cuff</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="material">Material</label>
-          <select id="material">
-            <option value="">Select material…</option>
-            <option>18K Gold</option>
-            <option>14K Gold</option>
-            <option>Rose Gold</option>
-            <option>White Gold</option>
-            <option>Sterling Silver</option>
-            <option>Platinum</option>
-            <option>Gold Vermeil</option>
-            <option>Gold Plated</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="stone">Gemstone / Stone</label>
-          <select id="stone">
-            <option value="">None / No stone</option>
-            <option>Diamond</option>
-            <option>Ruby</option>
-            <option>Sapphire</option>
-            <option>Emerald</option>
-            <option>Pearl</option>
-            <option>Amethyst</option>
-            <option>Opal</option>
-            <option>Turquoise</option>
-            <option>Moonstone</option>
-            <option>Topaz</option>
-            <option>Garnet</option>
-            <option>Cubic Zirconia</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="color">Primary Color</label>
-          <input type="text" id="color" placeholder="e.g. Deep Navy, Champagne" />
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="targetAudience">Target Audience</label>
-          <select id="targetAudience">
-            <option value="">Select audience…</option>
-            <option>Women 25–35</option>
-            <option>Women 35–50</option>
-            <option>Men 25–40</option>
-            <option>Couples / Gifts</option>
-            <option>Brides / Bridal</option>
-            <option>Luxury Shoppers</option>
-            <option>Minimalists</option>
-            <option>Fashion-forward</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="toneOfVoice">Tone of Voice</label>
-          <select id="toneOfVoice">
-            <option value="">Select tone…</option>
-            <option>Luxurious &amp; Elegant</option>
-            <option>Romantic &amp; Poetic</option>
-            <option>Bold &amp; Confident</option>
-            <option>Minimalist &amp; Clean</option>
-            <option>Playful &amp; Trendy</option>
-            <option>Timeless &amp; Classic</option>
-          </select>
-        </div>
-      </div>
-
-      <button class="generate-btn" id="generateBtn" onclick="generateContent()">
-        <span class="btn-text">Generate Content</span>
-        <span class="btn-loader" id="btnLoader" hidden>Generating…</span>
+    <nav class="section-nav" id="sectionNav" role="tablist">
+      <button class="nav-btn active" data-view="product" onclick="switchView('product')">Product</button>
+      <button class="nav-btn" data-view="ad" onclick="switchView('ad')">Ad Copy</button>
+      <button class="nav-btn" data-view="seo" onclick="switchView('seo')">SEO</button>
+      <button class="nav-btn" data-view="social" onclick="switchView('social')">Social</button>
+      <button class="nav-btn" data-view="collection" onclick="switchView('collection')">Collection</button>
+      <button class="nav-btn" data-view="persona" onclick="switchView('persona')">Persona</button>
+    </nav>
+    <div class="header-controls">
+      <select id="langSelect" class="lang-select" onchange="setLanguage(this.value)" aria-label="Language">
+        <option value="en">EN</option>
+        <option value="tr">TR</option>
+      </select>
+      <button class="brief-toggle" id="briefToggle" onclick="toggleBrief()" aria-label="Toggle product brief">
+        <span class="toggle-bars"><span></span><span></span><span></span></span>
+        <span class="toggle-label">Brief</span>
       </button>
+    </div>
+  </div>
+</header>
 
-      <p class="required-note">* All fields improve output quality</p>
-    </section>
+<!-- ═══ APP BODY ══════════════════════════════════════════════ -->
+<div class="app-body" id="appBody">
 
-    <!-- Output Panel -->
-    <section class="panel output-panel" id="outputPanel" hidden>
-      <div class="output-header">
-        <h2 class="panel-title">Generated Content</h2>
-        <button class="copy-all-btn" onclick="copyAll()">Copy All</button>
+  <div class="brief-overlay" id="briefOverlay" onclick="toggleBrief()"></div>
+
+  <!-- ─── FORM PANEL ────────────────────────────────────────── -->
+  <aside class="form-panel" id="formPanel">
+    <div class="panel-hd">
+      <span class="panel-title">Product Brief</span>
+      <button class="panel-close" onclick="toggleBrief()" aria-label="Close">✕</button>
+    </div>
+    <div class="form-scroll">
+
+      <!-- Presets -->
+      <div class="preset-strip">
+        <div class="preset-row-label">Quick Presets</div>
+        <div class="preset-row">
+          <button class="preset-btn" onclick="applyPreset('moissaniteRing')">Moissanite Ring</button>
+          <button class="preset-btn" onclick="applyPreset('zultaniteNecklace')">Zultanite Necklace</button>
+          <button class="preset-btn" onclick="applyPreset('silverBracelet')">Silver Bracelet</button>
+          <button class="preset-btn" onclick="applyPreset('goldEarrings')">Gold Earrings</button>
+        </div>
       </div>
 
+      <!-- Fields -->
+      <div class="form-fields">
+
+        <div class="fg span2">
+          <label for="fProductName">Product Name</label>
+          <input type="text" id="fProductName" placeholder="e.g. Lumière Ring" autocomplete="off"/>
+        </div>
+
+        <div class="fg">
+          <label for="fProductType">Product Type</label>
+          <select id="fProductType">
+            <option value="">Select…</option>
+            <option>Ring</option><option>Necklace</option><option>Bracelet</option>
+            <option>Earrings</option><option>Pendant</option><option>Cuff</option>
+            <option>Anklet</option><option>Brooch</option>
+          </select>
+        </div>
+
+        <div class="fg">
+          <label for="fMaterial">Material</label>
+          <select id="fMaterial">
+            <option value="">Select…</option>
+            <option>925 Sterling Silver</option><option>14K Gold</option><option>18K Gold</option>
+            <option>Rose Gold</option><option>White Gold</option>
+            <option>Gold-Plated Silver</option><option>Gold Vermeil</option><option>Platinum</option>
+          </select>
+        </div>
+
+        <div class="fg">
+          <label for="fStone">Gemstone</label>
+          <select id="fStone">
+            <option value="">None</option>
+            <option>Moissanite</option><option>Zultanite</option><option>Diamond</option>
+            <option>Ruby</option><option>Sapphire</option><option>Emerald</option>
+            <option>Pearl</option><option>Amethyst</option><option>Opal</option>
+            <option>Turquoise</option><option>Moonstone</option><option>Topaz</option>
+          </select>
+        </div>
+
+        <div class="fg">
+          <label for="fColor">Color / Finish</label>
+          <input type="text" id="fColor" placeholder="e.g. Icy White, Champagne"/>
+        </div>
+
+        <div class="fg">
+          <label for="fAudience">Target Audience</label>
+          <select id="fAudience">
+            <option value="">Select…</option>
+            <option>Women 25–35</option><option>Women 35–50</option><option>Men 25–40</option>
+            <option>Couples / Gifts</option><option>Brides / Bridal</option>
+            <option>Luxury Shoppers</option><option>Minimalists</option><option>Fashion-forward</option>
+          </select>
+        </div>
+
+        <div class="fg">
+          <label for="fTone">Tone of Voice</label>
+          <select id="fTone">
+            <option value="">Select…</option>
+            <option>Luxurious &amp; Elegant</option><option>Romantic &amp; Poetic</option>
+            <option>Bold &amp; Confident</option><option>Minimalist &amp; Clean</option>
+            <option>Timeless &amp; Classic</option><option>Warm &amp; Gifting</option>
+          </select>
+        </div>
+
+        <div class="fg">
+          <label for="fPrice">Price Positioning</label>
+          <select id="fPrice">
+            <option value="">Select…</option>
+            <option>Entry Luxury</option><option>Mid Luxury</option>
+            <option>High Luxury</option><option>Ultra Premium</option>
+          </select>
+        </div>
+
+        <div class="fg">
+          <label for="fCampaign">Campaign Goal</label>
+          <select id="fCampaign">
+            <option value="">Select…</option>
+            <option>New Launch</option><option>Brand Awareness</option><option>Sales / Conversion</option>
+            <option>Gift Season</option><option>Bridal / Wedding</option>
+            <option>Valentine's Day</option><option>Mother's Day</option><option>Anniversary</option>
+          </select>
+        </div>
+
+      </div><!-- /form-fields -->
+
+      <div class="form-actions">
+        <button class="btn-generate" id="btnGenerate" onclick="generateAll()">
+          <span id="btnLabel">Generate Content</span>
+          <span id="btnSpinner" class="btn-spinner" hidden></span>
+        </button>
+        <div class="util-row">
+          <button class="util-btn" onclick="clearForm()">Clear</button>
+          <button class="util-btn" onclick="copyAllOutputs()">Copy All</button>
+          <button class="util-btn" onclick="downloadTxt()">Download .txt</button>
+        </div>
+      </div>
+
+    </div><!-- /form-scroll -->
+  </aside>
+
+  <!-- ─── CONTENT AREA ──────────────────────────────────────── -->
+  <main class="content-area" id="contentArea">
+
+    <!-- Empty State -->
+    <div class="empty-state" id="emptyState">
+      <div class="empty-gem">◆</div>
+      <h2>Kara3 Commerce Engine</h2>
+      <p>Complete the product brief on the left, then click <strong>Generate Content</strong> to produce all marketing materials simultaneously — product listings, ad angles, SEO copy, social content, collection concepts, and buyer persona.</p>
+      <p class="empty-hint">Use a <strong>Quick Preset</strong> to populate the form instantly.</p>
+      <button class="btn-empty-try" onclick="applyPreset('moissaniteRing'); generateAll();">Try Moissanite Ring →</button>
+    </div>
+
+    <!-- PRODUCT CONTENT -->
+    <div class="section-view hidden" id="view-product">
+      <div class="section-hd"><h2>Product Content</h2><span>Listings, descriptions &amp; positioning</span></div>
       <div class="output-grid">
-        <div class="output-card" data-key="productTitle">
-          <div class="card-header">
-            <span class="card-label">Product Title</span>
-            <button class="copy-btn" onclick="copyCard('productTitle')">Copy</button>
-          </div>
-          <p class="card-content" id="productTitle"></p>
-        </div>
-
-        <div class="output-card" data-key="shortDesc">
-          <div class="card-header">
-            <span class="card-label">Short Description</span>
-            <button class="copy-btn" onclick="copyCard('shortDesc')">Copy</button>
-          </div>
-          <p class="card-content" id="shortDesc"></p>
-        </div>
-
-        <div class="output-card wide" data-key="longDesc">
-          <div class="card-header">
-            <span class="card-label">Long Description</span>
-            <button class="copy-btn" onclick="copyCard('longDesc')">Copy</button>
-          </div>
-          <p class="card-content" id="longDesc"></p>
-        </div>
-
-        <div class="output-card" data-key="instagramCaption">
-          <div class="card-header">
-            <span class="card-label">Instagram Caption</span>
-            <button class="copy-btn" onclick="copyCard('instagramCaption')">Copy</button>
-          </div>
-          <p class="card-content" id="instagramCaption"></p>
-        </div>
-
-        <div class="output-card" data-key="facebookAd">
-          <div class="card-header">
-            <span class="card-label">Facebook Ad Copy</span>
-            <button class="copy-btn" onclick="copyCard('facebookAd')">Copy</button>
-          </div>
-          <p class="card-content" id="facebookAd"></p>
-        </div>
-
-        <div class="output-card" data-key="seoTitle">
-          <div class="card-header">
-            <span class="card-label">SEO Title</span>
-            <button class="copy-btn" onclick="copyCard('seoTitle')">Copy</button>
-          </div>
-          <p class="card-content" id="seoTitle"></p>
-          <span class="char-count" id="seoTitleCount"></span>
-        </div>
-
-        <div class="output-card" data-key="seoMeta">
-          <div class="card-header">
-            <span class="card-label">SEO Meta Description</span>
-            <button class="copy-btn" onclick="copyCard('seoMeta')">Copy</button>
-          </div>
-          <p class="card-content" id="seoMeta"></p>
-          <span class="char-count" id="seoMetaCount"></span>
-        </div>
+        <div class="ocard wide"><div class="ocard-hd"><span>Product Title Options</span><button onclick="copyCard('productTitle')">Copy</button></div><div class="ocard-bd"><pre id="productTitle">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Luxury Name Suggestions</span><button onclick="copyCard('luxuryNames')">Copy</button></div><div class="ocard-bd"><pre id="luxuryNames">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Positioning Summary</span><button onclick="copyCard('positioning')">Copy</button></div><div class="ocard-bd"><pre id="positioning">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Short Description</span><button onclick="copyCard('shortDesc')">Copy</button></div><div class="ocard-bd"><pre id="shortDesc">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Bullet Highlights</span><button onclick="copyCard('bullets')">Copy</button></div><div class="ocard-bd"><pre id="bullets">—</pre></div></div>
+        <div class="ocard wide"><div class="ocard-hd"><span>Long Description</span><button onclick="copyCard('longDesc')">Copy</button></div><div class="ocard-bd"><pre id="longDesc">—</pre></div></div>
+        <div class="ocard wide"><div class="ocard-hd"><span>Call-to-Action Variations</span><button onclick="copyCard('ctas')">Copy</button></div><div class="ocard-bd"><pre id="ctas">—</pre></div></div>
       </div>
+    </div>
 
-      <div class="regenerate-row">
-        <button class="regenerate-btn" onclick="generateContent()">Regenerate</button>
+    <!-- AD COPY -->
+    <div class="section-view hidden" id="view-ad">
+      <div class="section-hd"><h2>Ad Copy</h2><span>Meta, Facebook &amp; paid advertising angles</span></div>
+      <div class="output-grid">
+        <div class="ocard wide"><div class="ocard-hd"><span>Meta / Facebook Primary Text</span><button onclick="copyCard('metaPrimary')">Copy</button></div><div class="ocard-bd"><pre id="metaPrimary">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Short Ad Copy</span><button onclick="copyCard('shortAd')">Copy</button></div><div class="ocard-bd"><pre id="shortAd">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Long Ad Copy</span><button onclick="copyCard('longAd')">Copy</button></div><div class="ocard-bd"><pre id="longAd">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Hook-First Ad</span><button onclick="copyCard('hookAd')">Copy</button></div><div class="ocard-bd"><pre id="hookAd">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Urgency Angle</span><button onclick="copyCard('urgencyAd')">Copy</button></div><div class="ocard-bd"><pre id="urgencyAd">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Luxury Angle</span><button onclick="copyCard('luxuryAd')">Copy</button></div><div class="ocard-bd"><pre id="luxuryAd">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Gift Angle</span><button onclick="copyCard('giftAd')">Copy</button></div><div class="ocard-bd"><pre id="giftAd">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Trust Angle</span><button onclick="copyCard('trustAd')">Copy</button></div><div class="ocard-bd"><pre id="trustAd">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Retargeting Copy</span><button onclick="copyCard('retargetAd')">Copy</button></div><div class="ocard-bd"><pre id="retargetAd">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Headline Options</span><button onclick="copyCard('headlines')">Copy</button></div><div class="ocard-bd"><pre id="headlines">—</pre></div></div>
       </div>
-    </section>
+    </div>
+
+    <!-- SEO -->
+    <div class="section-view hidden" id="view-seo">
+      <div class="section-hd"><h2>SEO</h2><span>Search optimization, metadata &amp; tags</span></div>
+      <div class="output-grid">
+        <div class="ocard"><div class="ocard-hd"><span>SEO Title</span><button onclick="copyCard('seoTitle')">Copy</button></div><div class="ocard-bd"><pre id="seoTitle">—</pre><span class="char-count" id="seoTitleCount"></span></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Meta Description</span><button onclick="copyCard('seoMeta')">Copy</button></div><div class="ocard-bd"><pre id="seoMeta">—</pre><span class="char-count" id="seoMetaCount"></span></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>SEO Keywords</span><button onclick="copyCard('seoKeywords')">Copy</button></div><div class="ocard-bd"><pre id="seoKeywords">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Product Tags</span><button onclick="copyCard('productTags')">Copy</button></div><div class="ocard-bd"><pre id="productTags">—</pre></div></div>
+        <div class="ocard wide"><div class="ocard-hd"><span>Collection SEO Text</span><button onclick="copyCard('collectionSeo')">Copy</button></div><div class="ocard-bd"><pre id="collectionSeo">—</pre></div></div>
+        <div class="ocard wide"><div class="ocard-hd"><span>Image Alt Text (3 variations)</span><button onclick="copyCard('altText')">Copy</button></div><div class="ocard-bd"><pre id="altText">—</pre></div></div>
+      </div>
+    </div>
+
+    <!-- SOCIAL -->
+    <div class="section-view hidden" id="view-social">
+      <div class="section-hd"><h2>Social Content</h2><span>Instagram, TikTok &amp; influencer materials</span></div>
+      <div class="output-grid">
+        <div class="ocard wide"><div class="ocard-hd"><span>Instagram Caption (Full)</span><button onclick="copyCard('igCaption')">Copy</button></div><div class="ocard-bd"><pre id="igCaption">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Instagram Short Caption</span><button onclick="copyCard('igShort')">Copy</button></div><div class="ocard-bd"><pre id="igShort">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Story Text (3 slides)</span><button onclick="copyCard('storyText')">Copy</button></div><div class="ocard-bd"><pre id="storyText">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Reel Caption</span><button onclick="copyCard('reelCaption')">Copy</button></div><div class="ocard-bd"><pre id="reelCaption">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>TikTok Hook Ideas</span><button onclick="copyCard('tiktokHooks')">Copy</button></div><div class="ocard-bd"><pre id="tiktokHooks">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>UGC Script Angle</span><button onclick="copyCard('ugcScript')">Copy</button></div><div class="ocard-bd"><pre id="ugcScript">—</pre></div></div>
+        <div class="ocard wide"><div class="ocard-hd"><span>Influencer Brief</span><button onclick="copyCard('influencerBrief')">Copy</button></div><div class="ocard-bd"><pre id="influencerBrief">—</pre></div></div>
+        <div class="ocard wide"><div class="ocard-hd"><span>FAQ Comment Replies</span><button onclick="copyCard('commentReplies')">Copy</button></div><div class="ocard-bd"><pre id="commentReplies">—</pre></div></div>
+      </div>
+    </div>
+
+    <!-- COLLECTION -->
+    <div class="section-view hidden" id="view-collection">
+      <div class="section-hd"><h2>Collection Builder</h2><span>Campaign themes, slogans &amp; launch angles</span></div>
+      <div class="output-grid">
+        <div class="ocard"><div class="ocard-hd"><span>Collection Name Ideas</span><button onclick="copyCard('collectionNames')">Copy</button></div><div class="ocard-bd"><pre id="collectionNames">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Campaign Theme</span><button onclick="copyCard('campaignTheme')">Copy</button></div><div class="ocard-bd"><pre id="campaignTheme">—</pre></div></div>
+        <div class="ocard wide"><div class="ocard-hd"><span>Collection Description</span><button onclick="copyCard('collectionDesc')">Copy</button></div><div class="ocard-bd"><pre id="collectionDesc">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Slogan Ideas</span><button onclick="copyCard('slogans')">Copy</button></div><div class="ocard-bd"><pre id="slogans">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Tagline Ideas</span><button onclick="copyCard('taglines')">Copy</button></div><div class="ocard-bd"><pre id="taglines">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Launch Angle</span><button onclick="copyCard('launchAngle')">Copy</button></div><div class="ocard-bd"><pre id="launchAngle">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Seasonal Angle</span><button onclick="copyCard('seasonalAngle')">Copy</button></div><div class="ocard-bd"><pre id="seasonalAngle">—</pre></div></div>
+      </div>
+    </div>
+
+    <!-- PERSONA -->
+    <div class="section-view hidden" id="view-persona">
+      <div class="section-hd"><h2>Customer Persona</h2><span>Buyer psychology, objections &amp; value proposition</span></div>
+      <div class="output-grid">
+        <div class="ocard wide"><div class="ocard-hd"><span>Buyer Persona</span><button onclick="copyCard('buyerPersona')">Copy</button></div><div class="ocard-bd"><pre id="buyerPersona">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Why This Buyer Wants It</span><button onclick="copyCard('whyBuy')">Copy</button></div><div class="ocard-bd"><pre id="whyBuy">—</pre></div></div>
+        <div class="ocard"><div class="ocard-hd"><span>Emotional Selling Angle</span><button onclick="copyCard('emotionalAngle')">Copy</button></div><div class="ocard-bd"><pre id="emotionalAngle">—</pre></div></div>
+        <div class="ocard wide"><div class="ocard-hd"><span>Objection Handling</span><button onclick="copyCard('objections')">Copy</button></div><div class="ocard-bd"><pre id="objections">—</pre></div></div>
+        <div class="ocard wide"><div class="ocard-hd"><span>Value Proposition Summary</span><button onclick="copyCard('valueProp')">Copy</button></div><div class="ocard-bd"><pre id="valueProp">—</pre></div></div>
+      </div>
+    </div>
+
   </main>
+</div><!-- /app-body -->
 
-  <footer class="site-footer">
-    <p>&copy; <span id="year"></span> Kara3. All rights reserved.</p>
-  </footer>
-
-  <div class="toast" id="toast">Copied to clipboard!</div>
-
-  <script src="app.js"></script>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
 </body>
 </html>
