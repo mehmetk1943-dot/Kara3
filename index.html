@@ -16,13 +16,13 @@
 
     <div class="brand">
       <span class="brand-name">KARA<em>3</em></span>
-      <span class="brand-sub">Commerce Engine</span>
+      <span class="brand-sub" data-i18n="brandSub">Commerce Engine</span>
     </div>
 
     <nav class="tab-nav" role="tablist" aria-label="Content tabs">
-      <button class="tab-btn active" data-tab="product" onclick="switchTab('product')">Product Page</button>
-      <button class="tab-btn"        data-tab="ads"     onclick="switchTab('ads')">Ads &amp; Social</button>
-      <button class="tab-btn"        data-tab="brand"   onclick="switchTab('brand')">Brand &amp; Collection</button>
+      <button class="tab-btn active" data-tab="product" data-i18n="tabProduct" onclick="switchTab('product')">Product Page</button>
+      <button class="tab-btn"        data-tab="ads"     data-i18n="tabAds"     onclick="switchTab('ads')">Ads &amp; Social</button>
+      <button class="tab-btn"        data-tab="brand"   data-i18n="tabBrand"   onclick="switchTab('brand')">Brand &amp; Collection</button>
     </nav>
 
     <div class="header-right">
@@ -51,7 +51,7 @@
 
       <!-- Presets -->
       <div class="form-block">
-        <div class="block-label">Sample Data</div>
+        <div class="block-label" data-i18n="sampleData">Sample Data</div>
         <div class="preset-row">
           <button class="preset-btn" onclick="applyPreset('moissaniteRing')">Moissanite Ring</button>
           <button class="preset-btn" onclick="applyPreset('zultaniteNecklace')">Zultanite Necklace</button>
@@ -64,12 +64,12 @@
       <div class="form-fields">
 
         <div class="fg span2">
-          <label for="fProductName">Product Name</label>
+          <label for="fProductName" data-i18n="labelName">Product Name</label>
           <input type="text" id="fProductName" placeholder="e.g. Lumière Ring" autocomplete="off"/>
         </div>
 
         <div class="fg">
-          <label for="fProductType">Type</label>
+          <label for="fProductType" data-i18n="labelType">Type</label>
           <select id="fProductType">
             <option value="">Select…</option>
             <option>Ring</option>
@@ -84,7 +84,7 @@
         </div>
 
         <div class="fg">
-          <label for="fMaterial">Material</label>
+          <label for="fMaterial" data-i18n="labelMaterial">Material</label>
           <select id="fMaterial">
             <option value="">Select…</option>
             <option>925 Sterling Silver</option>
@@ -99,7 +99,7 @@
         </div>
 
         <div class="fg">
-          <label for="fStone">Gemstone</label>
+          <label for="fStone" data-i18n="labelStone">Gemstone</label>
           <select id="fStone">
             <option value="">None</option>
             <option>Moissanite</option>
@@ -118,12 +118,12 @@
         </div>
 
         <div class="fg">
-          <label for="fColor">Color / Finish</label>
+          <label for="fColor" data-i18n="labelColor">Color / Finish</label>
           <input type="text" id="fColor" placeholder="e.g. Icy White"/>
         </div>
 
         <div class="fg">
-          <label for="fAudience">Audience</label>
+          <label for="fAudience" data-i18n="labelAudience">Audience</label>
           <select id="fAudience">
             <option value="">Select…</option>
             <option>Women 25–35</option>
@@ -138,7 +138,7 @@
         </div>
 
         <div class="fg">
-          <label for="fTone">Tone</label>
+          <label for="fTone" data-i18n="labelTone">Tone</label>
           <select id="fTone">
             <option value="">Select…</option>
             <option>Luxurious &amp; Elegant</option>
@@ -151,7 +151,7 @@
         </div>
 
         <div class="fg">
-          <label for="fPrice">Price Tier</label>
+          <label for="fPrice" data-i18n="labelPrice">Price Tier</label>
           <select id="fPrice">
             <option value="">Select…</option>
             <option>Entry Luxury</option>
@@ -162,7 +162,7 @@
         </div>
 
         <div class="fg">
-          <label for="fCampaign">Campaign</label>
+          <label for="fCampaign" data-i18n="labelCampaign">Campaign</label>
           <select id="fCampaign">
             <option value="">Select…</option>
             <option>New Launch</option>
@@ -180,17 +180,17 @@
 
       <!-- Generate Buttons -->
       <div class="gen-group">
-        <button class="btn-gen" id="btnGenProduct" onclick="generate('product')">Generate Product Page</button>
-        <button class="btn-gen" id="btnGenAds"     onclick="generate('ads')">Generate Ads &amp; Social</button>
-        <button class="btn-gen" id="btnGenBrand"   onclick="generate('brand')">Generate Brand &amp; Collection</button>
-        <button class="btn-gen btn-gen-all" id="btnGenAll" onclick="generate('all')">Generate Everything</button>
+        <button class="btn-gen"         id="btnGenProduct" data-i18n="btnProduct" onclick="generate('product')">Generate Product Page</button>
+        <button class="btn-gen"         id="btnGenAds"     data-i18n="btnAds"     onclick="generate('ads')">Generate Ads &amp; Social</button>
+        <button class="btn-gen"         id="btnGenBrand"   data-i18n="btnBrand"   onclick="generate('brand')">Generate Brand &amp; Collection</button>
+        <button class="btn-gen btn-gen-all" id="btnGenAll" data-i18n="btnAll"     onclick="generate('all')">Generate Everything</button>
       </div>
 
       <!-- Utility Row -->
       <div class="util-row">
-        <button class="util-btn" onclick="clearAll()">Clear</button>
-        <button class="util-btn" onclick="copyAll()">Copy All</button>
-        <button class="util-btn" onclick="downloadTxt()">Download</button>
+        <button class="util-btn" data-i18n="btnClear"    onclick="clearAll()">Clear</button>
+        <button class="util-btn" data-i18n="btnCopyAll"  onclick="copyAll()">Copy All</button>
+        <button class="util-btn" data-i18n="btnDownload" onclick="downloadTxt()">Download</button>
       </div>
 
     </div><!-- /form-scroll -->
@@ -202,45 +202,45 @@
     <!-- Empty State -->
     <div class="empty-state" id="emptyState">
       <div class="empty-gem">◆</div>
-      <h2>Commerce Engine</h2>
-      <p>Fill in the product brief and click a generate button to produce your content.</p>
-      <button class="btn-try" onclick="applyPreset('moissaniteRing'); generate('all');">Try Sample Data →</button>
+      <h2 data-i18n="emptyTitle">Commerce Engine</h2>
+      <p  data-i18n="emptyBody">Fill in the product brief and click a generate button to produce your content.</p>
+      <button class="btn-try" data-i18n="emptyTry" onclick="applyPreset('moissaniteRing'); generate('all');">Try Sample Data →</button>
     </div>
 
     <!-- ── Product Page Tab ─────────────────────────────────────────── -->
     <div class="tab-view" id="tab-product" role="tabpanel" aria-hidden="true">
       <div class="tab-hd">
-        <h2>Product Page</h2>
-        <span>Title, descriptions &amp; SEO</span>
+        <h2 data-i18n="hdProduct">Product Page</h2>
+        <span data-i18n="hdProductSub">Title, descriptions &amp; SEO</span>
       </div>
 
       <div class="tab-placeholder" id="ph-product">
-        <p>Click <strong>Generate Product Page</strong> or <strong>Generate Everything</strong> to produce this content.</p>
+        <p data-i18n="phProduct">Click Generate Product Page or Generate Everything to produce this content.</p>
       </div>
 
-      <div class="output-grid" id="grid-product">
+      <div class="output-grid hidden" id="grid-product">
         <div class="ocard wide">
-          <div class="ocard-hd"><span>Product Title</span><button onclick="copyCard('productTitle')">Copy</button></div>
+          <div class="ocard-hd"><span data-i18n="cardProductTitle">Product Title</span><button data-i18n="btnCopy" onclick="copyCard('productTitle')">Copy</button></div>
           <div class="ocard-bd"><pre id="productTitle"></pre></div>
         </div>
         <div class="ocard">
-          <div class="ocard-hd"><span>Short Description</span><button onclick="copyCard('shortDesc')">Copy</button></div>
+          <div class="ocard-hd"><span data-i18n="cardShortDesc">Short Description</span><button data-i18n="btnCopy" onclick="copyCard('shortDesc')">Copy</button></div>
           <div class="ocard-bd"><pre id="shortDesc"></pre></div>
         </div>
         <div class="ocard">
-          <div class="ocard-hd"><span>Bullet Highlights</span><button onclick="copyCard('bullets')">Copy</button></div>
+          <div class="ocard-hd"><span data-i18n="cardBullets">Bullet Highlights</span><button data-i18n="btnCopy" onclick="copyCard('bullets')">Copy</button></div>
           <div class="ocard-bd"><pre id="bullets"></pre></div>
         </div>
         <div class="ocard wide">
-          <div class="ocard-hd"><span>Long Description</span><button onclick="copyCard('longDesc')">Copy</button></div>
+          <div class="ocard-hd"><span data-i18n="cardLongDesc">Long Description</span><button data-i18n="btnCopy" onclick="copyCard('longDesc')">Copy</button></div>
           <div class="ocard-bd"><pre id="longDesc"></pre></div>
         </div>
         <div class="ocard">
-          <div class="ocard-hd"><span>SEO Title</span><button onclick="copyCard('seoTitle')">Copy</button></div>
+          <div class="ocard-hd"><span data-i18n="cardSeoTitle">SEO Title</span><button data-i18n="btnCopy" onclick="copyCard('seoTitle')">Copy</button></div>
           <div class="ocard-bd"><pre id="seoTitle"></pre><span class="char-count" id="seoTitleCount"></span></div>
         </div>
         <div class="ocard">
-          <div class="ocard-hd"><span>Meta Description</span><button onclick="copyCard('seoMeta')">Copy</button></div>
+          <div class="ocard-hd"><span data-i18n="cardSeoMeta">Meta Description</span><button data-i18n="btnCopy" onclick="copyCard('seoMeta')">Copy</button></div>
           <div class="ocard-bd"><pre id="seoMeta"></pre><span class="char-count" id="seoMetaCount"></span></div>
         </div>
       </div>
@@ -249,33 +249,33 @@
     <!-- ── Ads & Social Tab ─────────────────────────────────────────── -->
     <div class="tab-view" id="tab-ads" role="tabpanel" aria-hidden="true">
       <div class="tab-hd">
-        <h2>Ads &amp; Social</h2>
-        <span>Meta ads, Instagram &amp; TikTok</span>
+        <h2 data-i18n="hdAds">Ads &amp; Social</h2>
+        <span data-i18n="hdAdsSub">Meta ads, Instagram &amp; TikTok</span>
       </div>
 
       <div class="tab-placeholder" id="ph-ads">
-        <p>Click <strong>Generate Ads &amp; Social</strong> or <strong>Generate Everything</strong> to produce this content.</p>
+        <p data-i18n="phAds">Click Generate Ads &amp; Social or Generate Everything to produce this content.</p>
       </div>
 
-      <div class="output-grid" id="grid-ads">
+      <div class="output-grid hidden" id="grid-ads">
         <div class="ocard wide">
-          <div class="ocard-hd"><span>Meta Ad Copy</span><button onclick="copyCard('metaAd')">Copy</button></div>
+          <div class="ocard-hd"><span data-i18n="cardMetaAd">Meta Ad Copy</span><button data-i18n="btnCopy" onclick="copyCard('metaAd')">Copy</button></div>
           <div class="ocard-bd"><pre id="metaAd"></pre></div>
         </div>
         <div class="ocard">
-          <div class="ocard-hd"><span>Short Ad Copy</span><button onclick="copyCard('shortAd')">Copy</button></div>
+          <div class="ocard-hd"><span data-i18n="cardShortAd">Short Ad Copy</span><button data-i18n="btnCopy" onclick="copyCard('shortAd')">Copy</button></div>
           <div class="ocard-bd"><pre id="shortAd"></pre></div>
         </div>
         <div class="ocard">
-          <div class="ocard-hd"><span>Instagram Caption</span><button onclick="copyCard('igCaption')">Copy</button></div>
+          <div class="ocard-hd"><span data-i18n="cardIgCaption">Instagram Caption</span><button data-i18n="btnCopy" onclick="copyCard('igCaption')">Copy</button></div>
           <div class="ocard-bd"><pre id="igCaption"></pre></div>
         </div>
         <div class="ocard">
-          <div class="ocard-hd"><span>TikTok Hooks</span><button onclick="copyCard('tiktokHooks')">Copy</button></div>
+          <div class="ocard-hd"><span data-i18n="cardTiktokHooks">TikTok Hooks</span><button data-i18n="btnCopy" onclick="copyCard('tiktokHooks')">Copy</button></div>
           <div class="ocard-bd"><pre id="tiktokHooks"></pre></div>
         </div>
         <div class="ocard">
-          <div class="ocard-hd"><span>UGC Angle</span><button onclick="copyCard('ugcAngle')">Copy</button></div>
+          <div class="ocard-hd"><span data-i18n="cardUgcAngle">UGC Angle</span><button data-i18n="btnCopy" onclick="copyCard('ugcAngle')">Copy</button></div>
           <div class="ocard-bd"><pre id="ugcAngle"></pre></div>
         </div>
       </div>
@@ -284,33 +284,33 @@
     <!-- ── Brand & Collection Tab ───────────────────────────────────── -->
     <div class="tab-view" id="tab-brand" role="tabpanel" aria-hidden="true">
       <div class="tab-hd">
-        <h2>Brand &amp; Collection</h2>
-        <span>Collection concepts, persona &amp; strategy</span>
+        <h2 data-i18n="hdBrand">Brand &amp; Collection</h2>
+        <span data-i18n="hdBrandSub">Collection concepts, persona &amp; strategy</span>
       </div>
 
       <div class="tab-placeholder" id="ph-brand">
-        <p>Click <strong>Generate Brand &amp; Collection</strong> or <strong>Generate Everything</strong> to produce this content.</p>
+        <p data-i18n="phBrand">Click Generate Brand &amp; Collection or Generate Everything to produce this content.</p>
       </div>
 
-      <div class="output-grid" id="grid-brand">
+      <div class="output-grid hidden" id="grid-brand">
         <div class="ocard">
-          <div class="ocard-hd"><span>Collection Names</span><button onclick="copyCard('collectionNames')">Copy</button></div>
+          <div class="ocard-hd"><span data-i18n="cardCollectionNames">Collection Names</span><button data-i18n="btnCopy" onclick="copyCard('collectionNames')">Copy</button></div>
           <div class="ocard-bd"><pre id="collectionNames"></pre></div>
         </div>
         <div class="ocard">
-          <div class="ocard-hd"><span>Taglines</span><button onclick="copyCard('taglines')">Copy</button></div>
+          <div class="ocard-hd"><span data-i18n="cardTaglines">Taglines</span><button data-i18n="btnCopy" onclick="copyCard('taglines')">Copy</button></div>
           <div class="ocard-bd"><pre id="taglines"></pre></div>
         </div>
         <div class="ocard wide">
-          <div class="ocard-hd"><span>Launch Angle</span><button onclick="copyCard('launchAngle')">Copy</button></div>
+          <div class="ocard-hd"><span data-i18n="cardLaunchAngle">Launch Angle</span><button data-i18n="btnCopy" onclick="copyCard('launchAngle')">Copy</button></div>
           <div class="ocard-bd"><pre id="launchAngle"></pre></div>
         </div>
         <div class="ocard wide">
-          <div class="ocard-hd"><span>Buyer Persona</span><button onclick="copyCard('buyerPersona')">Copy</button></div>
+          <div class="ocard-hd"><span data-i18n="cardBuyerPersona">Buyer Persona</span><button data-i18n="btnCopy" onclick="copyCard('buyerPersona')">Copy</button></div>
           <div class="ocard-bd"><pre id="buyerPersona"></pre></div>
         </div>
         <div class="ocard wide">
-          <div class="ocard-hd"><span>Objection Handling</span><button onclick="copyCard('objections')">Copy</button></div>
+          <div class="ocard-hd"><span data-i18n="cardObjections">Objection Handling</span><button data-i18n="btnCopy" onclick="copyCard('objections')">Copy</button></div>
           <div class="ocard-bd"><pre id="objections"></pre></div>
         </div>
       </div>

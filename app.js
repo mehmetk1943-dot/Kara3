@@ -5,73 +5,152 @@
 // ═══════════════════════════════════════════════════════════════════════════
 
 let currentLang = 'en';
-
 const generated = { product: false, ads: false, brand: false };
+const GROUPS = ['product', 'ads', 'brand'];
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  UI STRINGS (i18n)
+//  UI STRINGS — language affects interface only; generated content is always English
 // ═══════════════════════════════════════════════════════════════════════════
 
 const UI = {
   en: {
-    btnProduct:  'Generate Product Page',
-    btnAds:      'Generate Ads & Social',
-    btnBrand:    'Generate Brand & Collection',
-    btnAll:      'Generate Everything',
-    generating:  'Generating…',
+    // Header / brand
+    brandSub:        'Commerce Engine',
+    // Tab nav
+    tabProduct:      'Product Page',
+    tabAds:          'Ads & Social',
+    tabBrand:        'Brand & Collection',
+    // Form section
+    sampleData:      'Sample Data',
+    // Form labels
+    labelName:       'Product Name',
+    labelType:       'Type',
+    labelMaterial:   'Material',
+    labelStone:      'Gemstone',
+    labelColor:      'Color / Finish',
+    labelAudience:   'Audience',
+    labelTone:       'Tone',
+    labelPrice:      'Price Tier',
+    labelCampaign:   'Campaign',
+    // Generate buttons
+    btnProduct:      'Generate Product Page',
+    btnAds:          'Generate Ads & Social',
+    btnBrand:        'Generate Brand & Collection',
+    btnAll:          'Generate Everything',
+    generating:      'Generating\u2026',
+    // Utility buttons
+    btnClear:        'Clear',
+    btnCopyAll:      'Copy All',
+    btnDownload:     'Download',
+    // Per-card copy button
+    btnCopy:         'Copy',
+    // Empty state
+    emptyTitle:      'Commerce Engine',
+    emptyBody:       'Fill in the product brief and click a generate button to produce your content.',
+    emptyTry:        'Try Sample Data \u2192',
+    // Tab headings
+    hdProduct:       'Product Page',
+    hdProductSub:    'Title, descriptions & SEO',
+    hdAds:           'Ads & Social',
+    hdAdsSub:        'Meta ads, Instagram & TikTok',
+    hdBrand:         'Brand & Collection',
+    hdBrandSub:      'Collection concepts, persona & strategy',
+    // Tab placeholders
+    phProduct:       'Click Generate Product Page or Generate Everything to produce this content.',
+    phAds:           'Click Generate Ads & Social or Generate Everything to produce this content.',
+    phBrand:         'Click Generate Brand & Collection or Generate Everything to produce this content.',
+    // Card headers
+    cardProductTitle:    'Product Title',
+    cardShortDesc:       'Short Description',
+    cardBullets:         'Bullet Highlights',
+    cardLongDesc:        'Long Description',
+    cardSeoTitle:        'SEO Title',
+    cardSeoMeta:         'Meta Description',
+    cardMetaAd:          'Meta Ad Copy',
+    cardShortAd:         'Short Ad Copy',
+    cardIgCaption:       'Instagram Caption',
+    cardTiktokHooks:     'TikTok Hooks',
+    cardUgcAngle:        'UGC Angle',
+    cardCollectionNames: 'Collection Names',
+    cardTaglines:        'Taglines',
+    cardLaunchAngle:     'Launch Angle',
+    cardBuyerPersona:    'Buyer Persona',
+    cardObjections:      'Objection Handling',
+    // Toast / feedback
     copied:      'Copied!',
     copiedAll:   'Copied!',
     noContent:   'Generate content first.',
     downloaded:  'Downloaded!',
-    phProduct:   'Click Generate Product Page or Generate Everything to produce this content.',
-    phAds:       'Click Generate Ads & Social or Generate Everything to produce this content.',
-    phBrand:     'Click Generate Brand & Collection or Generate Everything to produce this content.',
   },
   tr: {
-    btnProduct:  'Ürün Sayfası Oluştur',
-    btnAds:      'Reklam & Sosyal Oluştur',
-    btnBrand:    'Koleksiyon & Marka Oluştur',
-    btnAll:      'Hepsini Oluştur',
-    generating:  'Oluşturuluyor…',
+    brandSub:        'Ticaret Motoru',
+    tabProduct:      'Ürün Sayfası',
+    tabAds:          'Reklam & Sosyal',
+    tabBrand:        'Marka & Koleksiyon',
+    sampleData:      'Örnek Veri',
+    labelName:       'Ürün Adı',
+    labelType:       'Tür',
+    labelMaterial:   'Malzeme',
+    labelStone:      'Değerli Taş',
+    labelColor:      'Renk / Yüzey',
+    labelAudience:   'Hedef Kitle',
+    labelTone:       'Ton',
+    labelPrice:      'Fiyat Seviyesi',
+    labelCampaign:   'Kampanya',
+    btnProduct:      'Ürün Sayfası Oluştur',
+    btnAds:          'Reklam & Sosyal Oluştur',
+    btnBrand:        'Marka & Koleksiyon Oluştur',
+    btnAll:          'Hepsini Oluştur',
+    generating:      'Oluşturuluyor\u2026',
+    btnClear:        'Temizle',
+    btnCopyAll:      'Hepsini Kopyala',
+    btnDownload:     'İndir',
+    btnCopy:         'Kopyala',
+    emptyTitle:      'Ticaret Motoru',
+    emptyBody:       'Ürün bilgilerini doldurun ve içerik oluşturmak için bir butona tıklayın.',
+    emptyTry:        'Örnek Veriyi Dene \u2192',
+    hdProduct:       'Ürün Sayfası',
+    hdProductSub:    'Başlık, açıklamalar & SEO',
+    hdAds:           'Reklam & Sosyal',
+    hdAdsSub:        'Meta reklamlar, Instagram & TikTok',
+    hdBrand:         'Marka & Koleksiyon',
+    hdBrandSub:      'Koleksiyon fikirleri, persona & strateji',
+    phProduct:       '"Ürün Sayfası Oluştur" veya "Hepsini Oluştur"a tıklayın.',
+    phAds:           '"Reklam & Sosyal Oluştur" veya "Hepsini Oluştur"a tıklayın.',
+    phBrand:         '"Marka & Koleksiyon Oluştur" veya "Hepsini Oluştur"a tıklayın.',
+    cardProductTitle:    'Ürün Başlığı',
+    cardShortDesc:       'Kısa Açıklama',
+    cardBullets:         'Öne Çıkan Noktalar',
+    cardLongDesc:        'Uzun Açıklama',
+    cardSeoTitle:        'SEO Başlığı',
+    cardSeoMeta:         'Meta Açıklaması',
+    cardMetaAd:          'Meta Reklam Metni',
+    cardShortAd:         'Kısa Reklam Metni',
+    cardIgCaption:       'Instagram Başlığı',
+    cardTiktokHooks:     'TikTok Kancaları',
+    cardUgcAngle:        'UGC Açısı',
+    cardCollectionNames: 'Koleksiyon Adları',
+    cardTaglines:        'Sloganlar',
+    cardLaunchAngle:     'Lansman Açısı',
+    cardBuyerPersona:    'Alıcı Personası',
+    cardObjections:      'İtiraz Yönetimi',
     copied:      'Kopyalandı!',
     copiedAll:   'Kopyalandı!',
     noContent:   'Önce içerik oluşturun.',
     downloaded:  'İndirildi!',
-    phProduct:   '"Ürün Sayfası Oluştur" veya "Hepsini Oluştur"a tıklayın.',
-    phAds:       '"Reklam & Sosyal Oluştur" veya "Hepsini Oluştur"a tıklayın.',
-    phBrand:     '"Koleksiyon & Marka Oluştur" veya "Hepsini Oluştur"a tıklayın.',
   },
 };
 
 function t(key) {
-  return (UI[currentLang] || UI.en)[key] || key;
+  return (UI[currentLang] || UI.en)[key] || UI.en[key] || key;
 }
 
+// ── Language update: touches only UI text, never generated content ──────────
 function setLanguage(lang) {
   currentLang = lang;
-  // Update button labels
-  const buttons = {
-    btnGenProduct: 'btnProduct',
-    btnGenAds:     'btnAds',
-    btnGenBrand:   'btnBrand',
-    btnGenAll:     'btnAll',
-  };
-  Object.entries(buttons).forEach(([elId, uiKey]) => {
-    const el = document.getElementById(elId);
-    if (el) el.textContent = t(uiKey);
-  });
-  // Update placeholders
-  const placeholders = {
-    'ph-product': 'phProduct',
-    'ph-ads':     'phAds',
-    'ph-brand':   'phBrand',
-  };
-  Object.entries(placeholders).forEach(([elId, uiKey]) => {
-    const el = document.getElementById(elId);
-    if (el) {
-      const p = el.querySelector('p');
-      if (p) p.textContent = t(uiKey);
-    }
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const text = t(el.dataset.i18n);
+    if (text) el.textContent = text;
   });
 }
 
@@ -85,7 +164,6 @@ function gv(id) {
 }
 
 function pick(arr) {
-  if (!arr || !arr.length) return '';
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
@@ -93,8 +171,7 @@ function pickN(arr, n) {
   const copy = [...arr];
   const result = [];
   while (result.length < n && copy.length > 0) {
-    const idx = Math.floor(Math.random() * copy.length);
-    result.push(copy.splice(idx, 1)[0]);
+    result.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
   }
   return result;
 }
@@ -122,17 +199,10 @@ function showToast(msg) {
 //  TAB NAVIGATION
 // ═══════════════════════════════════════════════════════════════════════════
 
-let activeTab = 'product';
-
 function switchTab(tab) {
-  activeTab = tab;
-
-  // Update nav button active state
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.tab === tab);
   });
-
-  // Show/hide tab views
   document.querySelectorAll('.tab-view').forEach(view => {
     const isTarget = view.id === 'tab-' + tab;
     view.classList.toggle('tab-active', isTarget);
@@ -157,17 +227,6 @@ function toggleForm() {
 // ═══════════════════════════════════════════════════════════════════════════
 //  COPY & DOWNLOAD
 // ═══════════════════════════════════════════════════════════════════════════
-
-function copyCard(id) {
-  const el = document.getElementById(id);
-  if (!el || !el.textContent.trim()) {
-    showToast(t('noContent'));
-    return;
-  }
-  navigator.clipboard.writeText(el.textContent.trim())
-    .then(() => showToast(t('copied')))
-    .catch(() => showToast('Copy failed — use Ctrl+C'));
-}
 
 const OUTPUT_GROUPS = {
   product: ['productTitle', 'shortDesc', 'bullets', 'longDesc', 'seoTitle', 'seoMeta'],
@@ -194,61 +253,60 @@ const OUTPUT_LABELS = {
   objections:      'OBJECTION HANDLING',
 };
 
-function getGeneratedIds() {
-  return Object.entries(generated)
-    .filter(([, v]) => v)
-    .flatMap(([k]) => OUTPUT_GROUPS[k]);
+function copyCard(id) {
+  const el = document.getElementById(id);
+  if (!el || !el.textContent.trim()) {
+    showToast(t('noContent'));
+    return;
+  }
+  navigator.clipboard.writeText(el.textContent.trim())
+    .then(() => showToast(t('copied')))
+    .catch(() => showToast('Copy failed \u2014 use Ctrl+C'));
+}
+
+// Shared helper: build formatted text blocks for all generated output IDs
+function buildTextBlocks() {
+  const ids = GROUPS
+    .filter(g => generated[g])
+    .flatMap(g => OUTPUT_GROUPS[g]);
+  return ids.map(id => {
+    const el = document.getElementById(id);
+    const text = el && el.textContent.trim();
+    return text ? `=== ${OUTPUT_LABELS[id]} ===\n${text}` : null;
+  }).filter(Boolean);
 }
 
 function copyAll() {
-  const ids = getGeneratedIds();
-  if (!ids.length) { showToast(t('noContent')); return; }
-  const parts = ids.map(id => {
-    const el = document.getElementById(id);
-    if (!el || !el.textContent.trim()) return null;
-    return `=== ${OUTPUT_LABELS[id] || id.toUpperCase()} ===\n${el.textContent.trim()}`;
-  }).filter(Boolean);
-  if (!parts.length) { showToast(t('noContent')); return; }
-  navigator.clipboard.writeText(parts.join('\n\n'))
+  const blocks = buildTextBlocks();
+  if (!blocks.length) { showToast(t('noContent')); return; }
+  navigator.clipboard.writeText(blocks.join('\n\n'))
     .then(() => showToast(t('copiedAll')))
-    .catch(() => showToast('Copy failed — use Ctrl+C'));
+    .catch(() => showToast('Copy failed \u2014 use Ctrl+C'));
 }
 
 function downloadTxt() {
-  const ids = getGeneratedIds();
-  if (!ids.length) { showToast(t('noContent')); return; }
-  const parts = ids.map(id => {
-    const el = document.getElementById(id);
-    if (!el || !el.textContent.trim()) return null;
-    return `=== ${OUTPUT_LABELS[id] || id.toUpperCase()} ===\n${el.textContent.trim()}`;
-  }).filter(Boolean);
-  if (!parts.length) { showToast(t('noContent')); return; }
-
+  const blocks = buildTextBlocks();
+  if (!blocks.length) { showToast(t('noContent')); return; }
   const name = (gv('fProductName') || 'kara3').toLowerCase().replace(/\s+/g, '-');
-  const blob = new Blob([parts.join('\n\n')], { type: 'text/plain; charset=utf-8' });
+  const blob = new Blob([blocks.join('\n\n')], { type: 'text/plain; charset=utf-8' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = `${name}-content.txt`;
-  document.body.appendChild(a);
   a.click();
-  document.body.removeChild(a);
   URL.revokeObjectURL(a.href);
   showToast(t('downloaded'));
 }
 
 function clearAll() {
-  // Reset text inputs
   ['fProductName', 'fColor'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.value = '';
   });
-  // Reset selects
   ['fProductType', 'fMaterial', 'fStone', 'fAudience', 'fTone', 'fPrice', 'fCampaign'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.selectedIndex = 0;
   });
-  // Clear all output text
-  Object.values(OUTPUT_GROUPS).flat().forEach(id => {
+  GROUPS.flatMap(g => OUTPUT_GROUPS[g]).forEach(id => {
     const el = document.getElementById(id);
     if (el) el.textContent = '';
   });
@@ -256,24 +314,21 @@ function clearAll() {
     const el = document.getElementById(id);
     if (el) { el.textContent = ''; el.classList.remove('warn'); }
   });
-  // Reset state
-  generated.product = false;
-  generated.ads = false;
-  generated.brand = false;
 
-  // Hide all tab views, show empty state
+  generated.product = false;
+  generated.ads     = false;
+  generated.brand   = false;
+
   document.querySelectorAll('.tab-view').forEach(el => {
     el.classList.remove('tab-active');
     el.setAttribute('aria-hidden', 'true');
   });
-  // Show placeholders, hide grids in each tab
-  ['product', 'ads', 'brand'].forEach(g => {
+  GROUPS.forEach(g => {
     const ph   = document.getElementById('ph-' + g);
     const grid = document.getElementById('grid-' + g);
     if (ph)   ph.classList.remove('hidden');
     if (grid) grid.classList.add('hidden');
   });
-  // Show empty state
   const emptyState = document.getElementById('emptyState');
   if (emptyState) emptyState.classList.remove('hidden');
 }
@@ -284,12 +339,12 @@ function clearAll() {
 
 const PRESETS = {
   moissaniteRing: {
-    fProductName: 'Lumière Ring',
+    fProductName: 'Lumi\u00e8re Ring',
     fProductType: 'Ring',
     fMaterial:    '18K Gold',
     fStone:       'Moissanite',
     fColor:       'Icy White',
-    fAudience:    'Women 25–35',
+    fAudience:    'Women 25\u201335',
     fTone:        'Luxurious & Elegant',
     fPrice:       'Mid Luxury',
     fCampaign:    'New Launch',
@@ -300,13 +355,13 @@ const PRESETS = {
     fMaterial:    '14K Gold',
     fStone:       'Zultanite',
     fColor:       'Champagne',
-    fAudience:    'Women 35–50',
+    fAudience:    'Women 35\u201350',
     fTone:        'Timeless & Classic',
     fPrice:       'High Luxury',
     fCampaign:    'Brand Awareness',
   },
   silverBracelet: {
-    fProductName: 'Éclat Bracelet',
+    fProductName: '\u00c9clat Bracelet',
     fProductType: 'Bracelet',
     fMaterial:    '925 Sterling Silver',
     fStone:       '',
@@ -334,16 +389,15 @@ function applyPreset(key) {
   if (!preset) return;
   Object.entries(preset).forEach(([id, val]) => {
     const el = document.getElementById(id);
-    if (!el) return;
-    el.value = val;
+    if (el) el.value = val;
   });
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  CONTENT DATA — ENGLISH
+//  CONTENT DATA — always English; language selector only affects UI strings
 // ═══════════════════════════════════════════════════════════════════════════
 
-const DATA_EN = {
+const DATA = {
   tones: {
     'Luxurious & Elegant': {
       adj:   ['exquisite', 'opulent', 'refined', 'sophisticated', 'impeccable', 'resplendent', 'magnificent', 'sumptuous'],
@@ -403,9 +457,9 @@ const DATA_EN = {
     Topaz:      'featuring a warm imperial topaz, radiant with honeyed warmth and golden depth',
   },
   audience: {
-    'Women 25–35':     'the modern woman who moves between worlds — career and life — with equal ease',
-    'Women 35–50':     'the discerning woman who has earned her eye for quality and refuses anything less',
-    'Men 25–40':       'the contemporary man with a quiet appreciation for well-made, considered things',
+    'Women 25\u201335':     'the modern woman who moves between worlds — career and life — with equal ease',
+    'Women 35\u201350':     'the discerning woman who has earned her eye for quality and refuses anything less',
+    'Men 25\u201340':       'the contemporary man with a quiet appreciation for well-made, considered things',
     'Couples / Gifts': 'those who understand that the right gift carries everything words struggle to say',
     'Brides / Bridal': 'the bride who wants every detail of her day to be as intentional as the love behind it',
     'Luxury Shoppers': 'the connoisseur for whom material quality, provenance, and finish are non-negotiable',
@@ -422,7 +476,7 @@ const DATA_EN = {
     'New Launch':         { hook: 'Introducing, for the first time', urgency: 'Be among the first to own it.' },
     'Brand Awareness':    { hook: 'Discover the world of Kara3',    urgency: 'Explore the full collection.' },
     'Sales / Conversion': { hook: 'Available for a limited time',   urgency: 'Secure yours before it sells out.' },
-    'Gift Season':        { hook: 'The gift they will treasure',    urgency: 'Order now — arrives gift-ready.' },
+    'Gift Season':        { hook: 'The gift they will treasure',    urgency: 'Order now \u2014 arrives gift-ready.' },
     'Bridal / Wedding':   { hook: 'For your most precious day',     urgency: 'Reserve your piece today.' },
     "Valentine's Day":    { hook: 'Tell them with something that lasts', urgency: "Order before Valentine's Day." },
     "Mother's Day":       { hook: 'For the woman who deserves everything', urgency: "Celebrate her this Mother's Day." },
@@ -441,121 +495,13 @@ const DATA_EN = {
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  CONTENT DATA — TURKISH
+//  BUILD GENERATION CONTEXT (always English)
 // ═══════════════════════════════════════════════════════════════════════════
-
-const DATA_TR = {
-  tones: {
-    'Luxurious & Elegant': {
-      adj:   ['olağanüstü', 'zarif', 'muhteşem', 'sofistike', 'kusursuz', 'ihtişamlı', 'seçkin', 'görkemli'],
-      verbs: ['süsler', 'yükseltir', 'büyüler', 'tamamlar', 'ifade eder', 'simgeler', 'taşır', 'hükmeder'],
-      nouns: ['lüks', 'zarafet', 'prestij', 'ihtişam', 'ayrıcalık', 'mükemmellik', 'görkemlilik'],
-      ctas:  ['Yerinizi hemen ayırtın.', 'Eşsiz lüksün tadını çıkarın.', 'Kuyumculuğun zirvesi.', 'Dünyanızı yükseltin.'],
-      ig:    ['#İnceTakı #LüksTakı #Kara3', '#LüksAksesuarlar #TakıSeverleri #Kara3'],
-    },
-    'Romantic & Poetic': {
-      adj:   ['büyüleyici', 'efsunlu', 'ışıltılı', 'semavi', 'narin', 'rüya gibi', 'ay ışığı gibi', 'görkemli'],
-      verbs: ['fısıldar', 'çiçek açar', 'parlar', 'dans eder', 'süzülür', 'titreşir', 'ışıldar'],
-      nouns: ['aşk', 'romantizm', 'büyü', 'şiir', 'zarafet', 'harika', 'özlem', 'şefkat'],
-      ctas:  ['Sonsuza dek süren bir aşk.', 'Işık ve altınla yazılmış.', 'En önemli anlar için.', 'Hikayenizi güzelce anlatın.'],
-      ig:    ['#AşkTakısı #RomantikHediye #Kara3', '#OnaHediye #AşkHediyesi #Kara3'],
-    },
-    'Bold & Confident': {
-      adj:   ['çarpıcı', 'güçlü', 'cesur', 'ikonik', 'etkileyici', 'korkusuz', 'kararlı', 'özgün'],
-      verbs: ['hükmeder', 'tanımlar', 'ilham verir', 'dönüştürür', 'ilan eder', 'öne çıkar', 'sahip olur'],
-      nouns: ['güç', 'özgüven', 'varlık', 'ifade', 'karakter', 'kimlik', 'cesaret', 'tutum'],
-      ctas:  ['Anına sahip ol.', 'Unutulmaz ol.', 'Gücünü taşı.', 'İzini bırak.'],
-      ig:    ['#CesurTakı #İfadeTakısı #Kara3', '#İkonikStil #GüçTakısı #Kara3'],
-    },
-    'Minimalist & Clean': {
-      adj:   ['sade', 'temiz', 'özenli', 'saf', 'sessiz', 'düşünceli', 'net', 'kasıtlı'],
-      verbs: ['tamamlar', 'arındırır', 'kalıcıdır', 'dengeler', 'tanımlar', 'sessizce konuşur', 'zemin kurar'],
-      nouns: ['sadelik', 'denge', 'saflık', 'uyum', 'özen', 'netlik', 'arınma', 'odak'],
-      ctas:  ['Sessizce olağanüstü.', 'Az ama öz.', 'Özenin sanatı.', 'Kalıcı olacak şekilde tasarlandı.'],
-      ig:    ['#MinimalistTakı #SadeTasarım #Kara3', '#HerGünTakı #ÖzenliTasarım #Kara3'],
-    },
-    'Timeless & Classic': {
-      adj:   ['klasik', 'zamansız', 'köklü', 'ebedi', 'miras değerinde', 'kalıcı', 'seçkin', 'efsanevi'],
-      verbs: ['kalıcıdır', 'nesillere taşınır', 'onurlandırır', 'yankılanır', 'kutlar', 'hayatta kalır', 'çığır açar'],
-      nouns: ['miras', 'gelenek', 'ustalık', 'kalıcılık', 'köklülük', 'soy', 'zamansızlık', 'tarih'],
-      ctas:  ['Nesillere geçen bir parça.', 'Ömür boyu dayanacak şekilde tasarlandı.', 'İlerideki nesillere bırakın.', 'Her şeyin ötesinde kalıcı.'],
-      ig:    ['#ZamansızTakı #KlasikTasarım #Kara3', '#MirasKalitesi #KöklüTakı #Kara3'],
-    },
-    'Warm & Gifting': {
-      adj:   ['içten', 'düşünceli', 'değerli', 'samimi', 'anlamlı', 'sıcak', 'özenle seçilmiş', 'kıymetli'],
-      verbs: ['sevindirir', 'sıcaklık taşır', 'kutlar', 'bağlar', 'dokunur', 'hatırlatır', 'duygulandırır'],
-      nouns: ['sıcaklık', 'bağ', 'anı', 'mutluluk', 'sevgi', 'şükran', 'kutlama', 'şefkat'],
-      ctas:  ['Mükemmel hediye, zarif tasarım.', 'Asla unutulmayacak bir hediye.', 'Kalıcı bir şey ver.', 'En önemli kişileri kutlayın.'],
-      ig:    ['#HediyeTakı #LüksHediye #Kara3', '#OnaHediye #TakıHediye #Kara3'],
-    },
-  },
-  stones: {
-    Moissanite: 'elmas parlaklığını aşan, olağanüstü ateş ve ışıltısıyla dikkat çeken parlak bir moisanit taş ile süslenmiş',
-    Zultanite:  'değişen ışıkta altın yeşilinden gül pembesi tonlarına kayan, nadir bulunan bir zultanit taşı ile tasarlanmış',
-    Diamond:    'her ışık açısında mükemmel parıltısıyla öne çıkan, yuvarlak kesim bir elmas ile süslenmiş',
-    Ruby:       'tutku, güç ve sadakatin simgesi olan koyu kırmızı bir yakut ile yüceltilmiş',
-    Sapphire:   'gece gökyüzünün derin huzurunu yansıtan kadifemsi bir safir ile donatılmış',
-    Emerald:    'doğanın zenginliğini yoğun rengiyle taşıyan, görkemli bir zümrüt ile merkezlenmiş',
-    Pearl:      "okyanusun sabırlı güzelliğini yansıtan, en üst kalitede parlak bir inci ile zarifleştirilmiş",
-    Amethyst:   'derin moru ve sakinleştirici enerjisiyle öne çıkan bir ametist taşı ile tasarlanmış',
-    Opal:       'her açıdan farklı renk oyunlarıyla büyüleyen, içsel ateşiyle canlı bir opal taşı ile süslenmiş',
-    Turquoise:  'kadim medeniyetlerin taşı olan gökyüzü mavisi türkuaz ile donatılmış',
-    Moonstone:  'her açıdan mavi ışıltısıyla büyüleyen, başka dünyalı ve efsunlu bir ay taşı ile süslenmiş',
-    Topaz:      'bal ve kehribar sıcaklığıyla ışıldayan, derin sıcaklık taşıyan bir topaz ile yüceltilmiş',
-  },
-  audience: {
-    'Women 25–35':     'iş ve sosyal hayatında eşit rahatlıkla hareket eden, modern kadın',
-    'Women 35–50':     'kalite konusundaki gözünü geliştirmiş ve en azından razı olmayan, seçici kadın',
-    'Men 25–40':       'özenli ve iyi yapılmış şeyleri sessiz bir takdirle değerlendiren, çağdaş erkek',
-    'Couples / Gifts': 'doğru hediyenin sözcüklerin ifade edemeyeceği şeyleri taşıdığını anlayan çiftler',
-    'Brides / Bridal': 'düğününün her detayının, arkasındaki sevgi kadar özenli olmasını isteyen gelin adayı',
-    'Luxury Shoppers': 'malzeme kalitesi, köken ve işçilik konusunda taviz vermeyen lüks alışverişçi',
-    'Minimalists':     'daha az, daha iyi anlayışıyla özenli tasarımı seven kişi',
-    'Fashion-forward': 'takıyı süsleme değil, kimlik ifadesi olarak kullanan stil öncüsü',
-  },
-  price: {
-    'Entry Luxury':  { tag: 'erişilebilir lüks', promise: 'erişilebilir fiyatta üstün güzellik' },
-    'Mid Luxury':    { tag: 'yüksek lüks',       promise: 'üstün kalite ve kalıcı güzellik' },
-    'High Luxury':   { tag: 'ince lüks',         promise: 'kusursuz malzeme kalitesi ve işçilik' },
-    'Ultra Premium': { tag: 'ultra premium',     promise: 'kuyumculuğun, nadirliğin ve prestijin zirvesi' },
-  },
-  campaign: {
-    'New Launch':         { hook: 'İlk kez tanıtıyoruz',                    urgency: 'İlk sahipler arasına katılın.' },
-    'Brand Awareness':    { hook: "Kara3'ün dünyasını keşfedin",           urgency: 'Koleksiyonun tamamını inceleyin.' },
-    'Sales / Conversion': { hook: 'Sınırlı süre için mevcut',              urgency: 'Tükenmeden yerinizi ayırtın.' },
-    'Gift Season':        { hook: 'Hazır ambalajla özel hediye',           urgency: 'Hemen sipariş verin — hediye paketi dahil.' },
-    'Bridal / Wedding':   { hook: 'En değerli gününüz için',               urgency: 'Yerinizi bugün ayırtın.' },
-    "Valentine's Day":    { hook: 'Sevgilinize kalıcı bir şey söyleyin',    urgency: "Sevgililer Günü'nden önce sipariş verin." },
-    "Mother's Day":       { hook: 'Her şeyi hak eden kadın için',          urgency: "Bu Anneler Günü'nde ona verin." },
-    'Anniversary':        { hook: 'Her yıl büyüyen aşkınız için',         urgency: 'Bu yıldönümünü unutulmaz kılın.' },
-  },
-  typeHash: {
-    Ring:     '#Yüzük #AltınYüzük',
-    Necklace: '#Kolye #AltınKolye',
-    Bracelet: '#Bilezik #İnceTakı',
-    Earrings: '#Küpe #AltınKüpe',
-    Pendant:  '#Kolye #Pendant',
-    Cuff:     '#Kelepçe #TakıKelepçe',
-    Anklet:   '#HalhalBilezik #İnceTakı',
-    Brooch:   '#Broş #İnceTakı',
-  },
-};
-
-// ═══════════════════════════════════════════════════════════════════════════
-//  BUILD GENERATION CONTEXT
-// ═══════════════════════════════════════════════════════════════════════════
-
-function getD() {
-  return currentLang === 'tr' ? DATA_TR : DATA_EN;
-}
 
 function buildCtx() {
-  const D = getD();
-  const lang     = currentLang;
-
-  const name     = gv('fProductName') || (lang === 'tr' ? 'İmza Parça' : 'Signature Piece');
-  const type     = gv('fProductType') || (lang === 'tr' ? 'Takı' : 'Jewellery');
-  const material = gv('fMaterial')    || (lang === 'tr' ? 'değerli metal' : 'fine metal');
+  const name     = gv('fProductName') || 'Signature Piece';
+  const type     = gv('fProductType') || 'Jewellery';
+  const material = gv('fMaterial')    || 'fine metal';
   const stone    = gv('fStone')       || '';
   const color    = gv('fColor')       || '';
   const toneKey  = gv('fTone')        || 'Luxurious & Elegant';
@@ -563,118 +509,65 @@ function buildCtx() {
   const campaign = gv('fCampaign')    || 'New Launch';
   const audKey   = gv('fAudience')    || '';
 
-  const tone     = D.tones[toneKey]      || D.tones['Luxurious & Elegant'];
-  const price    = D.price[priceKey]     || D.price['Mid Luxury'];
-  const camp     = D.campaign[campaign]  || D.campaign['New Launch'];
-  const aud      = D.audience[audKey]    || (lang === 'tr' ? 'seçici kişi' : 'the discerning individual');
-  const stoneL   = D.stones[stone]       || '';
-  const typeH    = D.typeHash[type]      || (lang === 'tr' ? '#Takı' : '#Jewellery');
-  const typeL    = type.toLowerCase();
+  const tone  = DATA.tones[toneKey]      || DATA.tones['Luxurious & Elegant'];
+  const price = DATA.price[priceKey]     || DATA.price['Mid Luxury'];
+  const camp  = DATA.campaign[campaign]  || DATA.campaign['New Launch'];
+  const aud   = DATA.audience[audKey]    || 'the discerning individual';
+  const stoneL = DATA.stones[stone]      || '';
+  const typeH  = DATA.typeHash[type]     || '#Jewellery';
+  const typeL  = type.toLowerCase();
 
   const adj1  = pick(tone.adj);
   const adj2  = pick(tone.adj.filter(a => a !== adj1)) || pick(tone.adj);
-  const adj3  = pick(tone.adj.filter(a => a !== adj1 && a !== adj2)) || pick(tone.adj);
   const verb  = pick(tone.verbs);
   const noun  = pick(tone.nouns);
   const cta   = pick(tone.ctas);
   const igTag = pick(tone.ig);
 
-  // Build reusable fragments
-  let stoneDetail, colorNote, stoneWith;
-  if (lang === 'tr') {
-    stoneDetail = stoneL ? `, ${stoneL}` : '';
-    colorNote   = color  ? ` ${color} renginde` : '';
-    stoneWith   = stone  ? ` ve ${stone}` : '';
-  } else {
-    stoneDetail = stoneL ? `, ${stoneL}` : '';
-    colorNote   = color  ? ` in a ${color} finish` : '';
-    stoneWith   = stone  ? ` with ${stone}` : '';
-  }
+  const stoneDetail = stoneL ? `, ${stoneL}` : '';
+  const colorNote   = color  ? ` in a ${color} finish` : '';
+  const stoneWith   = stone  ? ` with ${stone}` : '';
 
   return {
-    lang, name, type, typeL, material, stone, color,
+    name, type, typeL, material, stone, color,
     toneKey, priceKey, campaign, audKey,
     tone, price, camp, aud, stoneL, typeH,
-    adj1, adj2, adj3, verb, noun, cta, igTag,
+    adj1, adj2, verb, noun, cta, igTag,
     stoneDetail, colorNote, stoneWith,
   };
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  GENERATORS
+//  GENERATORS — English only
 // ═══════════════════════════════════════════════════════════════════════════
 
 function genProduct(ctx) {
-  const { lang, name, type, typeL, material, stone, adj1, adj2, verb, noun, cta,
+  const { name, typeL, material, stone, adj1, adj2, verb, noun, cta,
           aud, stoneDetail, colorNote, stoneWith, price, toneKey } = ctx;
 
-  if (lang === 'tr') {
-    const productTitle = [
-      `${name} — ${cap(adj1)} ${material} ${type}`,
-      `${name} | Kara3`,
-      `${material}${stone ? ' ve ' + stone : ''} ${name}`,
-    ].join('\n');
-
-    const shortDesc = `${material}${stoneDetail}${colorNote} ile özenle üretilen ${name}, `
-      + `${cap(aud)} için tasarlanmıştır. Her detayıyla ${noun} taşıyan bu ${typeL}, `
-      + `zahmetsizce ${verb}.`;
-
-    const bullets = [
-      `· ${material}${stone ? ' ve ' + stone : ''} ile üretilmiştir`,
-      `· ${cap(adj1)} tasarım, el işçiliğiyle tamamlanmıştır`,
-      `· ${cap(price.tag)} — ${price.promise}`,
-      `· ${cap(aud)} için idealdir`,
-      `· Kara3 imzalı hediye kutusunda sunulur`,
-    ].join('\n');
-
-    const longDesc = [
-      `${name}'yi tanıtıyoruz — Kara3'ün ${noun} koleksiyonundan gerçek anlamda ${adj1} bir parça.`,
-      `\n\n${material}${stoneDetail}${colorNote} ile el yapımı olarak üretilen bu ${typeL}, `,
-      `${noun} ve titiz işçiliğin kusursuz birleşimidir. Her eğri ve yüzey detayı, `,
-      `parçanın her ortamda, her ışıkta ve her anda zahmetsizce ${verb} biçimde tasarlanmıştır.`,
-      `\n\n${cap(aud)} için ideal olan ${name}, özel anlardan büyük günlere kesintisiz eşlik eder. `,
-      `Hediye olarak veya kendiniz için seçin — kalıcı güzellik ve Kara3 imzası size ait.`,
-      `\n\n${cta}`,
-    ].join('');
-
-    const seoTitle = pick([
-      `${name} ${material} ${type} | Kara3 İnce Kuyumculuk`,
-      `${cap(adj1)} ${material} ${type}${stone ? ' ve ' + stone : ''} — Kara3`,
-      `${name} ${type} | ${cap(price.tag)} ${material} | Kara3`,
-    ]);
-
-    const seoMeta = pick([
-      `${name}'yi keşfedin — ${material}${stoneL ? ', ' + stoneL : ''}${colorNote} ile üretilmiş ${adj1} bir ${typeL}. ${cta} Ücretsiz kargo mevcuttur.`,
-      `Kara3'ten ${name}: ${cap(aud)} için tasarlanmış, ${material}${stone ? ' ve ' + stone : ''} ile üretilmiş ${adj1} bir ${typeL}. Koleksiyonu keşfedin.`,
-    ]);
-
-    return { productTitle, shortDesc, bullets, longDesc, seoTitle, seoMeta };
-  }
-
-  // English
   const productTitle = [
-    `The ${name} — ${cap(adj1)} ${material} ${type}`,
+    `The ${name} \u2014 ${cap(adj1)} ${material} ${ctx.type}`,
     `${name} | Kara3 Fine Jewellery`,
-    `${name} ${type} in ${material}${stone ? ' & ' + stone : ''}`,
+    `${name} ${ctx.type} in ${material}${stone ? ' & ' + stone : ''}`,
   ].join('\n');
 
   const shortDesc = `An ${adj1} ${typeL} crafted from ${material}${stoneDetail}${colorNote}. `
-    + `Made for ${aud}, the ${name} ${verb} with unmistakable ${noun} — `
+    + `Made for ${aud}, the ${name} ${verb} with unmistakable ${noun} \u2014 `
     + `a piece that is immediately, entirely right.`;
 
   const bullets = [
-    `· ${material}${stone ? ' with ' + stone : ''} — ${price.promise}`,
-    `· ${cap(adj1)} design with meticulous hand-finishing at every point`,
-    `· Made for ${aud}`,
-    `· ${cap(price.tag)} — quality that does not settle`,
-    `· Arrives in a Kara3 signature gift box`,
+    `\u00b7 ${material}${stone ? ' with ' + stone : ''} \u2014 ${price.promise}`,
+    `\u00b7 ${cap(adj1)} design with meticulous hand-finishing at every point`,
+    `\u00b7 Made for ${aud}`,
+    `\u00b7 ${cap(price.tag)} \u2014 quality that does not settle`,
+    `\u00b7 Arrives in a Kara3 signature gift box`,
   ].join('\n');
 
   const longDesc = [
-    `The ${name} is an ${adj1} piece from Kara3's ${toneKey.toLowerCase()} collection — one of those rare things that feels immediately right.`,
+    `The ${name} is an ${adj1} piece from Kara3\u2019s ${toneKey.toLowerCase()} collection \u2014 one of those rare things that feels immediately right.`,
     `\n\nHandcrafted from ${material}${stoneDetail}${colorNote}, every curve, proportion, and surface `,
     `detail has been considered to create a ${typeL} that ${verb} in any setting, any light, any moment. `,
-    `The result is a piece that carries ${noun} without effort — and ${adj2} from every angle.`,
+    `The result is a piece that carries ${noun} without effort \u2014 and remains ${adj2} from every angle.`,
     `\n\nMade for ${aud}, the ${name} moves between the intimate and the grand without hesitation. `,
     `Whether chosen as a personal marker or gifted to someone who deserves only the best, `,
     `it carries the quiet authority that is the signature of Kara3.`,
@@ -682,13 +575,13 @@ function genProduct(ctx) {
   ].join('');
 
   const seoTitle = pick([
-    `The ${name} — ${material} ${type} | Kara3 Fine Jewellery`,
-    `${cap(adj1)} ${material} ${type}${stone ? ' with ' + stone : ''} — Kara3`,
-    `${name} | ${cap(price.tag)} ${material} ${type} | Kara3`,
+    `The ${name} \u2014 ${material} ${ctx.type} | Kara3 Fine Jewellery`,
+    `${cap(adj1)} ${material} ${ctx.type}${stone ? ' with ' + stone : ''} \u2014 Kara3`,
+    `${name} | ${cap(price.tag)} ${material} ${ctx.type} | Kara3`,
   ]);
 
   const seoMeta = pick([
-    `Shop the ${name} — an ${adj1} ${material} ${typeL}${stoneL ? ', ' + stoneL : ''}. ${cta} Free worldwide shipping from Kara3.`,
+    `Shop the ${name} \u2014 an ${adj1} ${material} ${typeL}${ctx.stoneL ? ', ' + ctx.stoneL : ''}. ${cta} Free worldwide shipping from Kara3.`,
     `The ${name} by Kara3: a ${price.tag} ${typeL} in ${material}${stone ? ' with ' + stone : ''}, made for ${aud}. Discover the collection.`,
   ]);
 
@@ -696,47 +589,11 @@ function genProduct(ctx) {
 }
 
 function genAds(ctx) {
-  const { lang, name, type, typeL, material, stone, adj1, adj2, verb, noun, cta,
-          aud, stoneDetail, colorNote, stoneWith, price, camp, tone, typeH, igTag } = ctx;
+  const { name, typeL, material, stone, adj1, adj2, verb, noun, cta,
+          aud, stoneDetail, stoneWith, price, camp, tone, typeH, igTag } = ctx;
 
-  if (lang === 'tr') {
-    const metaAd = [
-      `${camp.hook} — Kara3'ten ${name}.`,
-      `\n\nBu ${adj1} ${typeL}, ${material}${stoneDetail} ile üretilmiş. Yalnızca bir takı değil — ${noun} beyanı.`,
-      `\n\n${cap(aud)} için tasarlandı. ${cap(price.promise)}.`,
-      `\n\n${cta} ${camp.urgency}`,
-    ].join('');
-
-    const shortAd = `${name}. ${cap(adj1)}. ${cap(adj2)}. Kara3'te şimdi alışveriş yapın.`;
-
-    const igCaption = [
-      `◆ ${name}. ${cap(adj1)}, ${adj2}, benzersiz.`,
-      `\n\n${material}${stoneL ? ', ' + stoneL : ''}${colorNote} ile üretilmiştir.`,
-      `\n\n${cap(aud)} için — ${pick(['kendi değerini bilenler.', 'olağanüstüyü arayanlar.', 'güzel yaşayanlar.', 'farkı anlayanlar.'])}`,
-      `\n\n${cta}`,
-      `\n\n${igTag} ${typeH} #Kara3Takı #LüksTakı`,
-    ].join('');
-
-    const tiktokHooks = [
-      `"Bu ${typeL}'yı çıkaramıyorum…"`,
-      `"Kara3'ün ${name}'i her şeyi değiştirdi."`,
-      `"POV: Gördüğünüz en ${adj1} ${typeL}."`,
-      `"${material}${stoneWith} bu kadar şık nasıl görünür?"`,
-      `"${cta} — biyodaki link, ciddi konuşuyorum."`,
-    ].join('\n');
-
-    const ugcAngle = [
-      `AÇILIŞ (0–3sn): ${name}'yi kameraya tut. "Bunu görmeniz lazım."`,
-      `ORTA (3–15sn): Farklı açıları göster. "Bu Kara3'ten ${name}. ${material}${stoneWith}. Bu kadar güzel bir kutuda geldi. İşçilik gerçekten..."`,
-      `KAPANIŞ (15–30sn): Takıyı tak. "${cta} Biyodaki link — gerçekten, sadece gidin."`,
-    ].join('\n');
-
-    return { metaAd, shortAd, igCaption, tiktokHooks, ugcAngle };
-  }
-
-  // English
   const metaAd = [
-    `${camp.hook} — the ${name} by Kara3.`,
+    `${camp.hook} \u2014 the ${name} by Kara3.`,
     `\n\nThis ${adj1} ${typeL} in ${material}${stoneDetail} is more than jewellery. It is a declaration of ${noun}.`,
     `\n\nDesigned for ${aud} who recognise ${adj2} craft and refuse anything less than ${price.promise}.`,
     `\n\n${cta} ${camp.urgency}`,
@@ -745,87 +602,35 @@ function genAds(ctx) {
   const shortAd = `The ${name}. ${cap(adj1)}. ${cap(adj2)}. Unmistakably Kara3. Shop now.`;
 
   const igCaption = [
-    `◆ The ${name}. ${cap(adj1)}, ${adj2}, and entirely its own.`,
-    `\n\nCrafted from ${material}${stoneL ? ', ' + stoneL : ''}${colorNote}. `,
+    `\u25c6 The ${name}. ${cap(adj1)}, ${adj2}, and entirely its own.`,
+    `\n\nCrafted from ${material}${ctx.stoneL ? ', ' + ctx.stoneL : ''}${ctx.colorNote}. `,
     `Made for ${aud} who ${pick(['know exactly what they want.', 'refuse the ordinary.', 'wear their story.', 'understand the difference between good and exceptional.'])}`,
     `\n\n${cta}`,
     `\n\n${igTag} ${typeH} #Kara3Jewellery #FineJewellery`,
   ].join('');
 
   const tiktokHooks = [
-    `"I haven't taken this ${typeL} off once — here's why."`,
-    `"The ${name} from Kara3 is genuinely different. Let me show you."`,
-    `"POV: holding the most ${adj1} ${typeL} you've ever touched."`,
-    `"Why does ${material}${stoneWith} look THIS good?"`,
-    `"${cta} Link in bio. Trust me on this one."`,
+    `\u201cI haven\u2019t taken this ${typeL} off once \u2014 here\u2019s why.\u201d`,
+    `\u201cThe ${name} from Kara3 is genuinely different. Let me show you.\u201d`,
+    `\u201cPOV: holding the most ${adj1} ${typeL} you\u2019ve ever touched.\u201d`,
+    `\u201cWhy does ${material}${stoneWith} look THIS good?\u201d`,
+    `\u201c${cta} Link in bio. Trust me on this one.\u201d`,
   ].join('\n');
 
   const ugcAngle = [
-    `HOOK (0–3s): Hold up the ${name} to camera. "You need to see what just arrived."`,
-    `MID (3–15s): Show close details. "This is the ${name} by Kara3. ${material}${stoneWith}. `
-    + `The box alone — but then you hold it. The weight, the finish… honestly."`,
-    `CLOSE (15–30s): Wear the piece. "${cta} Link in bio. I'm not exaggerating — just go."`,
+    `HOOK (0\u20133s): Hold up the ${name} to camera. \u201cYou need to see what just arrived.\u201d`,
+    `MID (3\u201315s): Show close details. \u201cThis is the ${name} by Kara3. ${material}${stoneWith}. `
+    + `The box alone \u2014 but then you hold it. The weight, the finish\u2026 honestly.\u201d`,
+    `CLOSE (15\u201330s): Wear the piece. \u201c${cta} Link in bio. I\u2019m not exaggerating \u2014 just go.\u201d`,
   ].join('\n');
 
   return { metaAd, shortAd, igCaption, tiktokHooks, ugcAngle };
 }
 
 function genBrand(ctx) {
-  const { lang, name, type, typeL, material, stone, adj1, adj2, noun, cta,
+  const { name, material, stone, adj1, adj2, noun, cta,
           camp, price, aud, stoneWith, toneKey, priceKey, audKey, campaign } = ctx;
 
-  if (lang === 'tr') {
-    const collectionNames = pickN([
-      `${cap(noun)} Koleksiyonu`,
-      `Kara3 ${cap(adj1)} Editörü`,
-      `${material.split(' ').pop()} Arşivi`,
-      `Kara3 ${toneKey.split(' ')[0]} Serisi`,
-      `Maison ${name}`,
-      `${cap(adj2)} Hat`,
-    ], 4).join('\n');
-
-    const taglines = pickN([
-      `${cap(noun)}'i giy.`,
-      `${cap(adj1)} olmak bir sanattır.`,
-      `${cap(material)}. ${cap(noun)}. Kara3.`,
-      `${cap(adj1)}, tasarımla.`,
-      `İnce kuyumculuk, dürüstçe yapılmış.`,
-      `${cap(aud)} için.`,
-      `Farkı hissediyorsunuz.`,
-    ], 4).join('\n');
-
-    const launchAngle = [
-      `Lansman çerçevesi: ${camp.hook}.`,
-      `Ana mesaj: "${name} burada — ${adj1} ${material}${stoneWith}, ${aud} için."`,
-      `Lansman harekete geçirici: "${camp.urgency}"`,
-      `Kanallar: Instagram beslemesi, Hikayeler, Meta reklamlar, e-posta bülteni.`,
-    ].join('\n');
-
-    const buyerPersona = [
-      `ALICI PERSONELİ — ${audKey || 'Çekirdek Alıcı'}`,
-      `\nKim: ${cap(aud)}`,
-      `Ton uyumu: ${toneKey}`,
-      `Fiyat kademesi: ${priceKey || 'Yüksek Lüks'} — ${price.promise} için yatırım yapmaya hazır`,
-      `Motivasyon: ${noun} taşıyan, kimliğini yansıtan ${adj1} takıları arar`,
-      `Alışveriş davranışı: Araştırma odaklı — kaliteye, işçiliğe ve marka hikayesine değer verir`,
-      `Keşif kanalları: Instagram, Pinterest, kelimeden kelimeye, Google Arama`,
-    ].join('\n');
-
-    const objections = [
-      `"Fiyatına değer mi?"`,
-      `→ ${name}, ${price.promise} sunar. ${cap(adj1)} ${material}${stoneWith}, nesillere dayanacak şekilde üretilmiş.`,
-      `\n"Solmaz ya da kararmaz mı?"`,
-      `→ Uzman işçilikle tamamlanan, yüksek kaliteli ${material} ile üretilmiştir — güzel yaşlanması için tasarlandı.`,
-      `\n"Doğru hediye mi?"`,
-      `→ ${cap(aud)} için tasarlandı, Kara3 imzalı hediye kutusunda gelir. Sunum dahil, etki garantili.`,
-      `\n"Beğenmezsem iade edebilir miyim?"`,
-      `→ Kara3, 30 günlük sorunsuz iade ve değişim politikası sunar.`,
-    ].join('\n');
-
-    return { collectionNames, taglines, launchAngle, buyerPersona, objections };
-  }
-
-  // English
   const collectionNames = pickN([
     `The ${cap(noun)} Collection`,
     `Kara3 ${cap(adj1)} Edit`,
@@ -847,43 +652,42 @@ function genBrand(ctx) {
     `${cap(noun)}, without compromise.`,
   ], 4).join('\n');
 
-  // Build launch angle, including seasonal note if relevant
   const seasonalMap = {
-    "Valentine's Day": "A declaration of love, made in gold.",
-    "Mother's Day":    "For the woman who deserves everything.",
-    'Bridal / Wedding': "For the day that changes everything.",
-    'Gift Season':     "The gift that speaks without words.",
-    'Anniversary':     "For the love that deepens with time.",
+    "Valentine's Day": 'A declaration of love, made in gold.',
+    "Mother's Day":    'For the woman who deserves everything.',
+    'Bridal / Wedding': 'For the day that changes everything.',
+    'Gift Season':     'The gift that speaks without words.',
+    'Anniversary':     'For the love that deepens with time.',
   };
   const seasonalNote = seasonalMap[campaign];
 
   const launchAngle = [
     `Launch frame: ${camp.hook}.`,
-    `Hero message: "The ${name} is here — ${adj1} ${material}${stoneWith}, made for ${aud}."`,
+    `Hero message: "The ${name} is here \u2014 ${adj1} ${material}${stoneWith}, made for ${aud}."`,
     `Launch CTA: "${camp.urgency}"`,
     `Channels: Instagram feed, Stories, Meta ads, email newsletter.`,
     seasonalNote ? `Seasonal hook: "${seasonalNote}"` : null,
   ].filter(Boolean).join('\n');
 
   const buyerPersona = [
-    `BUYER PERSONA — ${audKey || 'Core Buyer'}`,
+    `BUYER PERSONA \u2014 ${audKey || 'Core Buyer'}`,
     `\nWho: ${cap(aud)}`,
     `Tone resonance: ${toneKey}`,
-    `Price tier: ${priceKey || 'Mid Luxury'} — invests for ${price.promise}`,
+    `Price tier: ${priceKey || 'Mid Luxury'} \u2014 invests for ${price.promise}`,
     `Motivation: seeks ${adj1} jewellery that carries ${noun} and reflects identity with precision`,
-    `Shopping behaviour: research-led — values material quality, craftsmanship, and brand story`,
+    `Shopping behaviour: research-led \u2014 values material quality, craftsmanship, and brand story`,
     `Discovery: Instagram, Pinterest, word of mouth, Google Search`,
   ].join('\n');
 
   const objections = [
-    `"Is it worth the price?"`,
-    `→ The ${name} delivers ${price.promise}. ${cap(adj1)} ${material}${stoneWith} — crafted to last decades, not seasons.`,
-    `\n"Will it tarnish or fade?"`,
-    `→ Made from high-grade ${material} with professional finishing — designed to age gracefully.`,
-    `\n"Is it the right gift?"`,
-    `→ Made for ${aud}, it arrives in a Kara3 signature gift box — presentation included, impression guaranteed.`,
-    `\n"What if it doesn't fit or suit?"`,
-    `→ Kara3 offers a 30-day hassle-free return and exchange policy.`,
+    `\u201cIs it worth the price?\u201d`,
+    `\u2192 The ${name} delivers ${price.promise}. ${cap(adj1)} ${material}${stoneWith} \u2014 crafted to last decades, not seasons.`,
+    `\n\u201cWill it tarnish or fade?\u201d`,
+    `\u2192 Made from high-grade ${material} with professional finishing \u2014 designed to age gracefully.`,
+    `\n\u201cIs it the right gift?\u201d`,
+    `\u2192 Made for ${aud}, it arrives in a Kara3 signature gift box \u2014 presentation included, impression guaranteed.`,
+    `\n\u201cWhat if it doesn\u2019t fit or suit?\u201d`,
+    `\u2192 Kara3 offers a 30-day hassle-free return and exchange policy.`,
   ].join('\n');
 
   return { collectionNames, taglines, launchAngle, buyerPersona, objections };
@@ -905,7 +709,7 @@ function renderCharCount(preId, countId, ideal) {
   const len = pre.textContent.length;
   if (!len) { cnt.textContent = ''; cnt.classList.remove('warn'); return; }
   const over = len > ideal;
-  cnt.textContent = `${len} chars${over ? ' — over limit (≤' + ideal + ')' : ''}`;
+  cnt.textContent = `${len} chars${over ? ' \u2014 over limit (\u2264' + ideal + ')' : ''}`;
   cnt.classList.toggle('warn', over);
 }
 
@@ -922,14 +726,14 @@ function revealGroup(g) {
 
 function generate(group) {
   const ctx    = buildCtx();
-  const groups = group === 'all' ? ['product', 'ads', 'brand'] : [group];
+  const groups = group === 'all' ? GROUPS : [group];
 
-  // Set button to "Generating…" state
-  const btnMap = { product: 'btnGenProduct', ads: 'btnGenAds', brand: 'btnGenBrand', all: 'btnGenAll' };
-  const activeBtn = document.getElementById(btnMap[group]);
+  // Show "Generating…" label and disable the active button
+  const btnIdMap = { product: 'btnGenProduct', ads: 'btnGenAds', brand: 'btnGenBrand', all: 'btnGenAll' };
+  const activeBtn = document.getElementById(btnIdMap[group]);
   if (activeBtn) { activeBtn.textContent = t('generating'); activeBtn.disabled = true; }
 
-  // Use a minimal timeout so the UI can repaint before heavy work
+  // Use setTimeout(0) so the button label repaint fires before generation work
   setTimeout(() => {
     try {
       groups.forEach(g => {
@@ -942,19 +746,15 @@ function generate(group) {
         revealGroup(g);
       });
 
-      // SEO char counts
       if (generated.product) {
         renderCharCount('seoTitle', 'seoTitleCount', 60);
         renderCharCount('seoMeta',  'seoMetaCount',  160);
       }
 
-      // Hide empty state once we have any content
       const emptyState = document.getElementById('emptyState');
       if (emptyState) emptyState.classList.add('hidden');
 
-      // Switch to the first generated tab
       switchTab(group === 'all' ? 'product' : group);
-
     } finally {
       if (activeBtn) {
         const labelKey = { product: 'btnProduct', ads: 'btnAds', brand: 'btnBrand', all: 'btnAll' }[group];
@@ -962,14 +762,5 @@ function generate(group) {
         activeBtn.disabled = false;
       }
     }
-  }, 30);
+  }, 0);
 }
-
-// ═══════════════════════════════════════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════════════════════════════════════
-
-// Tab views start in neutral state (not hidden, not active — CSS decides via .tab-active)
-// switchTab sets the correct one active. On first load, show product tab nav as active
-// but don't reveal any tab view content (emptyState covers the content area).
-// Nothing else to init — the HTML already has the right default classes.
